@@ -45,7 +45,7 @@ const indexHtml = path.join(RENDERER_DIST, 'index.html')
 async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
-    icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
+    icon: path.join(process.env.VITE_PUBLIC, 'icon.ico'),
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
@@ -56,6 +56,7 @@ async function createWindow() {
       // contextIsolation: false,
     },
   })
+
 
   win.setMenu(null) // Disable default menu
 
@@ -70,6 +71,7 @@ async function createWindow() {
   // Test actively push message to the Electron-Renderer
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', new Date().toLocaleString())
+    win.setTitle('QinFeng'); // 设置窗口标题
   })
 
   // Make all links open with the browser, not with the application

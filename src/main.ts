@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import 'element-plus/theme-chalk/dark/css-vars.css'
+import './assets/styles/element/index.scss' // 引入全局 SCSS 文件
 import './style.css'
 
 import './demos/ipc'

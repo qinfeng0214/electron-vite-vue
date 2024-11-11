@@ -11,7 +11,7 @@ import electron from 'vite-plugin-electron/simple'
 import pkg from './package.json'
 
 const pathSrc = path.resolve(__dirname, 'src')
-
+console.log('pathSrc:', pathSrc)
 
 export default defineConfig(({ command }) => {
   fs.rmSync('dist-electron', { recursive: true, force: true })
@@ -44,7 +44,8 @@ export default defineConfig(({ command }) => {
         dirs: ["./src/components/**"], // 自动引入'./src/components/'中的所有组件
       }),
       AutoImport({
-        imports: ['vue', 'vue-router'],
+        // 导入vueuse
+        imports: ['vue', 'vue-router', '@vueuse/core'],
         resolvers: [
           // 自动导入图标组件
           IconsResolver({
