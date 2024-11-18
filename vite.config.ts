@@ -11,7 +11,6 @@ import electron from 'vite-plugin-electron/simple'
 import pkg from './package.json'
 
 const pathSrc = path.resolve(__dirname, 'src')
-console.log('pathSrc:', pathSrc)
 
 export default defineConfig(({ command }) => {
   fs.rmSync('dist-electron', { recursive: true, force: true })
@@ -34,13 +33,18 @@ export default defineConfig(({ command }) => {
         resolvers: [
           // 自动注册图标组件
           IconsResolver({
-            enabledCollections: ['ep'],
+            // 自动引入的Icon组件统一前缀，默认为icon，设置false为不需要前缀
+            prefix: 'icon',
+            // 当图标集名字过长时，可使用集合别名
+            alias: {
+              system: 'system-uicons'
+            },
           }),
           ElementPlusResolver({
             importStyle: 'css'
           })
         ],
-        dts: path.resolve(pathSrc, 'components.d.ts'), // 指定自动导入函数TS类型声明文件路径
+        dts: path.resolve(pathSrc + '/types', 'components.d.ts'), // 指定自动导入函数TS类型声明文件路径
         dirs: ["./src/components/**"], // 自动引入'./src/components/'中的所有组件
       }),
       AutoImport({
@@ -55,8 +59,12 @@ export default defineConfig(({ command }) => {
             importStyle: 'css'
           })
         ],
-        dts: path.resolve(pathSrc, 'auto-imports.d.ts'), // 指定自动导入函数TS类型声明文件路径
+        dts: path.resolve(pathSrc + '/types', 'auto-imports.d.ts'), // 指定自动导入函数TS类型声明文件路径
         // dirs: ["./src/utils/**"], // utils下的所有文件都支持自动引入
+      }),
+      Icons({
+        compiler: 'vue3',// 指定编译器
+        autoInstall: true,
       }),
       electron({
         main: {

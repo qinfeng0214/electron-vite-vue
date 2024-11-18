@@ -3,7 +3,7 @@
   "version": "33.2.0",
   "main": "dist-electron/main/index.js",
   "description": "Really simple Electron + Vue + Vite boilerplate.",
-  "author": "草鞋没号 <308487730@qq.com>",
+  "author": "秦风0214 <68805160@qq.com>",
   "license": "MIT",
   "private": true,
   "keywords": [
@@ -24,6 +24,8 @@
     "build": "vue-tsc --noEmit && vite build && electron-builder"
   },
   "devDependencies": {
+    "@iconify-json/solar": "^1.2.1",
+    "@iconify/vue": "^4.1.2",
     "@vitejs/plugin-vue": "^5.0.4",
     "electron": "^33.2.0",
     "electron-builder": "^25.1.8",

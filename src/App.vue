@@ -4,7 +4,7 @@
   active-color="var(--el-fill-color-dark)"
   inactive-color="var(--el-color-primary)"
   @change="toggleDark" />
-  <el-button type="primary">hhhh</el-button>
+  <el-button>哈哈哈哈哈<IconSolarSunBold /></el-button>
 
  </template>
 
