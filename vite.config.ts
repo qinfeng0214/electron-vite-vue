@@ -9,13 +9,13 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import electron from 'vite-plugin-electron/simple'
 import pkg from './package.json'
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
-const { dependencies, devDependencies, name, version } = pkg;
+const { dependencies, devDependencies, name, version } = pkg
 const __APP_INFO__ = {
   pkg: { dependencies, devDependencies, name, version },
-  lastBuildTime: dayjs().format("YYYY-MM-DD HH:mm:ss")
-};
+  lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss')
+}
 
 const pathSrc = path.resolve(__dirname, 'src')
 
@@ -27,11 +27,10 @@ export default defineConfig(({ command }) => {
   const sourcemap = isServe || !!process.env.VSCODE_DEBUG
 
   return {
-
     resolve: {
       alias: {
-        '@': pathSrc,
-      },
+        '@': pathSrc
+      }
     },
     define: {
       __APP_INFO__: JSON.stringify(__APP_INFO__)
@@ -39,11 +38,9 @@ export default defineConfig(({ command }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          // 引入多个 css 文件 reset.scss 、common.scss、variables.scss
+          // 引入多个 css 文件 reset.scss 、common.scss、var.scss
           additionalData: `
-            @import "@/styles/reset.scss";
-            @import "@/styles/common.scss";
-            @import "@/styles/variables.scss";
+            @use "@/styles/index" as *;
           `
         }
       }
@@ -59,14 +56,14 @@ export default defineConfig(({ command }) => {
             // 当图标集名字过长时，可使用集合别名
             alias: {
               system: 'system-uicons'
-            },
+            }
           }),
           ElementPlusResolver({
             importStyle: 'css'
           })
         ],
         dts: path.resolve(pathSrc + '/types', 'components.d.ts'), // 指定自动导入函数TS类型声明文件路径
-        dirs: ["./src/components/**"], // 自动引入'./src/components/'中的所有组件
+        dirs: ['./src/components/**'] // 自动引入'./src/components/'中的所有组件
       }),
       AutoImport({
         // 导入vueuse
@@ -74,18 +71,18 @@ export default defineConfig(({ command }) => {
         resolvers: [
           // 自动导入图标组件
           IconsResolver({
-            prefix: 'Icon',
+            prefix: 'Icon'
           }),
           ElementPlusResolver({
             importStyle: 'css'
           })
         ],
-        dts: path.resolve(pathSrc + '/types', 'auto-imports.d.ts'), // 指定自动导入函数TS类型声明文件路径
+        dts: path.resolve(pathSrc + '/types', 'auto-imports.d.ts') // 指定自动导入函数TS类型声明文件路径
         // dirs: ["./src/utils/**"], // utils下的所有文件都支持自动引入
       }),
       Icons({
-        compiler: 'vue3',// 指定编译器
-        autoInstall: true,
+        compiler: 'vue3', // 指定编译器
+        autoInstall: true
       }),
       electron({
         main: {
@@ -93,7 +90,7 @@ export default defineConfig(({ command }) => {
           entry: 'electron/main/index.ts',
           onstart({ startup }) {
             if (process.env.VSCODE_DEBUG) {
-              console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App')
+              console.log(/* For `.vscode/.debug.script.mjs` */ '[startup] Electron App')
             } else {
               startup()
             }
@@ -108,10 +105,10 @@ export default defineConfig(({ command }) => {
                 // we can use `external` to exclude them to ensure they work correctly.
                 // Others need to put them in `dependencies` to ensure they are collected into `app.asar` after the app is built.
                 // Of course, this is not absolute, just this way is relatively simple. :)
-                external: Object.keys('dependencies' in pkg ? pkg.dependencies : {}),
-              },
-            },
-          },
+                external: Object.keys('dependencies' in pkg ? pkg.dependencies : {})
+              }
+            }
+          }
         },
         preload: {
           // Shortcut of `build.rollupOptions.input`.
@@ -123,24 +120,26 @@ export default defineConfig(({ command }) => {
               minify: isBuild,
               outDir: 'dist-electron/preload',
               rollupOptions: {
-                external: Object.keys('dependencies' in pkg ? pkg.dependencies : {}),
-              },
-            },
-          },
+                external: Object.keys('dependencies' in pkg ? pkg.dependencies : {})
+              }
+            }
+          }
         },
         // Ployfill the Electron and Node.js API for Renderer process.
         // If you want use Node.js in Renderer process, the `nodeIntegration` needs to be enabled in the Main process.
         // See 👉 https://github.com/electron-vite/vite-plugin-electron-renderer
-        renderer: {},
-      }),
+        renderer: {}
+      })
     ],
-    server: process.env.VSCODE_DEBUG && (() => {
-      const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
-      return {
-        host: url.hostname,
-        port: +url.port,
-      }
-    })(),
-    clearScreen: false,
+    server:
+      process.env.VSCODE_DEBUG &&
+      (() => {
+        const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
+        return {
+          host: url.hostname,
+          port: +url.port
+        }
+      })(),
+    clearScreen: false
   }
 })

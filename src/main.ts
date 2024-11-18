@@ -1,20 +1,20 @@
 import { createApp } from 'vue'
+import { router } from './router'
 import App from './App.vue'
-// element css
-import "element-plus/dist/index.css";
-// element dark css
-import "element-plus/theme-chalk/dark/css-vars.css";
-// custom element dark css
-import "@/styles/element-dark.scss";
-// custom element css
-import "@/styles/element.scss";
+import ElementPlus from 'element-plus'
 
-import './demos/ipc'
-// If you want use Node.js, the`nodeIntegration` needs to be enabled in the Main process.
-// import './demos/node'
+// styles
+import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
-createApp(App)
-  .mount('#app')
-  .$nextTick(() => {
-    postMessage({ payload: 'removeLoading' }, '*')
-  })
+// create app
+const app = createApp(App)
+
+// use plugins
+app.use(router)
+app.use(ElementPlus)
+
+// mount app
+app.mount('#app').$nextTick(() => {
+  postMessage({ payload: 'removeLoading' }, '*')
+})
