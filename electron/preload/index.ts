@@ -17,7 +17,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
   invoke(...args: Parameters<typeof ipcRenderer.invoke>) {
     const [channel, ...omit] = args
     return ipcRenderer.invoke(channel, ...omit)
-  },
+  }
 
   // You can expose other APTs you need here.
   // ...
@@ -25,7 +25,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 
 // --------- Preload scripts loading ---------
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     if (condition.includes(document.readyState)) {
       resolve(true)
     } else {
@@ -48,7 +48,7 @@ const safeDOM = {
     if (Array.from(parent.children).find(e => e === child)) {
       return parent.removeChild(child)
     }
-  },
+  }
 }
 
 /**
@@ -102,7 +102,7 @@ function useLoading() {
     removeLoading() {
       safeDOM.remove(document.head, oStyle)
       safeDOM.remove(document.body, oDiv)
-    },
+    }
   }
 }
 
@@ -111,7 +111,7 @@ function useLoading() {
 const { appendLoading, removeLoading } = useLoading()
 domReady().then(appendLoading)
 
-window.onmessage = (ev) => {
+window.onmessage = ev => {
   ev.data.payload === 'removeLoading' && removeLoading()
 }
 
