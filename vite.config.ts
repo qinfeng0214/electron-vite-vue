@@ -9,6 +9,13 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import electron from 'vite-plugin-electron/simple'
 import pkg from './package.json'
+import dayjs from "dayjs";
+
+const { dependencies, devDependencies, name, version } = pkg;
+const __APP_INFO__ = {
+  pkg: { dependencies, devDependencies, name, version },
+  lastBuildTime: dayjs().format("YYYY-MM-DD HH:mm:ss")
+};
 
 const pathSrc = path.resolve(__dirname, 'src')
 
@@ -26,7 +33,21 @@ export default defineConfig(({ command }) => {
         '@': pathSrc,
       },
     },
-
+    define: {
+      __APP_INFO__: JSON.stringify(__APP_INFO__)
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // 引入多个 css 文件 reset.scss 、common.scss、variables.scss
+          additionalData: `
+            @import "@/styles/reset.scss";
+            @import "@/styles/common.scss";
+            @import "@/styles/variables.scss";
+          `
+        }
+      }
+    },
     plugins: [
       vue(),
       Components({

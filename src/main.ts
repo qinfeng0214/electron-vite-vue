@@ -1,8 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import 'element-plus/theme-chalk/dark/css-vars.css'
-import './assets/styles/element/index.scss' // 引入全局 SCSS 文件
-import './style.css'
+// element css
+import "element-plus/dist/index.css";
+// element dark css
+import "element-plus/theme-chalk/dark/css-vars.css";
+// custom element dark css
+import "@/styles/element-dark.scss";
+// custom element css
+import "@/styles/element.scss";
 
 import './demos/ipc'
 // If you want use Node.js, the`nodeIntegration` needs to be enabled in the Main process.

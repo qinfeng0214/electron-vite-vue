@@ -16,5 +16,9 @@
       ],
       "url": "https://json.schemastore.org/electron-builder"
     }
+  ],
+  "cSpell.words": [
+    "commitlint",
+    "vueuse"
   ]
 }
