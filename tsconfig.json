@@ -4,6 +4,7 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Node",
+    "types": ["vite/client", "element-plus/global"],
     "strict": true,
     "jsx": "preserve",
     "resolveJsonModule": true,
@@ -13,7 +14,7 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [
     { "path": "./tsconfig.node.json" }
   ]
