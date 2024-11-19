@@ -12,13 +12,3 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
   openWindow: (hash: string) => ipcRenderer.invoke('open-win', hash)
 })
-
-declare global {
-  interface Window {
-    electronAPI: {
-      login: () => void
-      onMessage: (callback: (message: string) => void) => () => void
-      openWindow: (hash: string) => Promise<void>
-    }
-  }
-}

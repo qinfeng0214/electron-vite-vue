@@ -21,3 +21,15 @@ declare namespace NodeJS {
     VITE_PUBLIC: string
   }
 }
+
+// 定义 ElectronAPI 接口
+interface ElectronAPI {
+  login: () => void
+  onMessage: (callback: (message: string) => void) => () => void
+  openWindow: (hash: string) => Promise<void>
+}
+
+// 扩展 Window 接口
+interface Window {
+  electronAPI: ElectronAPI
+}
