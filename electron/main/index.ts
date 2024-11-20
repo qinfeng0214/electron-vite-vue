@@ -32,8 +32,8 @@ const indexHtml = path.join(RENDERER_DIST, 'index.html')
 async function createLoginWindow() {
   loginWindow = new BrowserWindow({
     title: 'Login',
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 750,
     // icon: path.join(process.env.VITE_PUBLIC, process.platform === 'darwin' ? 'icon.icns' : 'icon.ico'), // 使用 .ico 或 .icns 格式的图标
     resizable: false,
     frame: false, // 禁用原生标题栏

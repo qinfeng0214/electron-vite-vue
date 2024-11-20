@@ -11,10 +11,11 @@
             <!-- <input
               class="input-field" placeholder="邮箱"
               type="email"> -->
-            <el-input class="input-field" placeholder="邮箱"></el-input>
+            <el-input class="input-field" placeholder="账号"></el-input>
           </div>
           <div class="input-block space-y">
-            <input class="input-field" placeholder="密码" type="password" />
+            <!-- <input class="input-field" placeholder="密码" type="password" /> -->
+            <el-input class="input-field" placeholder="密码"></el-input>
           </div>
           <div class="checkbox-group space-y">
             <div class="checkbox-block">
@@ -37,8 +38,8 @@
       </form>
     </div>
     <div class="image-container">
-      <div>
-        <!-- <img class="image-wrapper" src="https://cdn.jsdelivr.net/gh/MarleneJiang/ImgHosting/img/202109080857232.png" alt=""> -->
+      <div class="image-wrapper">
+        <img src="https://cdn.jsdelivr.net/gh/MarleneJiang/ImgHosting/img/202109080857232.png" alt="">
       </div>
     </div>
   </div>
@@ -50,7 +51,7 @@
 .container {
   display: flex;
   flex-grow: 1;
-  max-width: 720px;
+  max-width: 820px;
 }
 .inner-container {
   width: 50%;
@@ -61,7 +62,7 @@
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
 }
 .header {
-  margin-bottom: 1.75rem; /* 28px */
+  margin-bottom: 1.75rem;
 }
 .title {
   margin-bottom: 8px;
@@ -105,16 +106,16 @@
 }
 .checkbox-container {
   display: flex;
-  gap: 12px; /* 12px */
+  gap: 12px;
   align-items: center;
 }
 .checkbox {
   width: 1rem;
   height: 1rem;
   appearance: none;
-  background-color: #fff; /* white */
-  border: 1px solid #d4d4d8; /* gray */
-  border-radius: 0.25rem; /* 4px */
+  background-color: #fff;
+  border: 1px solid #d4d4d8;
+  border-radius: 0.25rem;
   transition:
     background-color 0.2s,
     border-color 0.2s;
@@ -145,29 +146,34 @@
 }
 .submit-button {
   width: 100%;
-  height: 48px; /* 48px */
-  font-size: 1.5rem; /* 24px */
-  color: #fff; /* white */
+  height: 48px;
+  font-size: 1.5rem;
+  color: #fff;
   letter-spacing: 0.1em;
   background-color: #f56692;
-  border-radius: 8px; /* 8px */
+  border-radius: 8px;
   transition: background-color 0.2s;
 }
 .submit-button:hover,
 .submit-button:focus {
-  background-color: #f34278; /* secondary */
+  background-color: #f34278;
 }
 .image-container {
   width: 50%;
   background: linear-gradient(117.76deg, rgb(255 255 255 / 70%) -7.21%, rgb(255 255 255 / 50%) 118.08%);
   backdrop-filter: blur(8px);
-  border-top-right-radius: 8px; /* 8px */
-  border-bottom-right-radius: 8px; /* 8px */
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 .image-wrapper {
-  width: 83%; /* 10/12 */
-  margin-top: -5rem; /* -80px */
-  margin-left: 2rem; /* 32px */
+  width: 83%;
+  height: 100%;
+  img{
+    width:375px;
+    height: 574.5px;
+    margin-top: -80px;
+    margin-left:16px;
+  }
 }
 #app {
   display: flex;
