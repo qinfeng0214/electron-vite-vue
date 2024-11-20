@@ -10,5 +10,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     }
   },
 
-  openWindow: (hash: string) => ipcRenderer.invoke('open-win', hash)
+  openWindow: (hash: string) => ipcRenderer.invoke('open-win', hash),
+  closeWindow: () => ipcRenderer.send('close-window'),
+  minimizeWindow: () => ipcRenderer.send('minimize-window')
 })

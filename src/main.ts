@@ -4,8 +4,7 @@ import App from './App.vue'
 import ElementPlus from 'element-plus'
 
 // styles
-import 'element-plus/dist/index.css'
-import 'element-plus/theme-chalk/dark/css-vars.css'
+import './styles/index.scss'
 
 // create app
 const app = createApp(App)

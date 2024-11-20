@@ -39,9 +39,9 @@ export default defineConfig(({ command }) => {
       preprocessorOptions: {
         scss: {
           // 引入多个 css 文件 reset.scss 、common.scss、var.scss
-          additionalData: `
-            @use "@/styles/index" as *;
-          `
+          // additionalData: `
+          //   @use "@/styles/index";
+          // `
         }
       }
     },

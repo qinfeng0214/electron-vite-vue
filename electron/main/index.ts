@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, nativeImage } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
@@ -32,10 +32,11 @@ const indexHtml = path.join(RENDERER_DIST, 'index.html')
 async function createLoginWindow() {
   loginWindow = new BrowserWindow({
     title: 'Login',
-    width: 400,
-    height: 300,
-    icon: path.join(process.env.VITE_PUBLIC, 'icon.ico'),
+    width: 800,
+    height: 600,
+    // icon: path.join(process.env.VITE_PUBLIC, process.platform === 'darwin' ? 'icon.icns' : 'icon.ico'), // 使用 .ico 或 .icns 格式的图标
     resizable: false,
+    frame: false, // 禁用原生标题栏
     webPreferences: {
       preload,
       nodeIntegration: false,
@@ -64,7 +65,7 @@ async function createMainWindow() {
     title: 'Main window',
     width: 800,
     height: 600,
-    icon: path.join(process.env.VITE_PUBLIC, 'icon.ico'),
+    // icon: path.join(process.env.VITE_PUBLIC, process.platform === 'darwin' ? 'icon.icns' : 'icon.ico'), // 使用 .ico 或 .icns 格式的图标
     webPreferences: {
       preload,
       nodeIntegration: false,
@@ -100,7 +101,44 @@ ipcMain.on('login-success', () => {
   }
 })
 
-app.whenReady().then(createLoginWindow)
+ipcMain.on('close-window', () => {
+  if (loginWindow) {
+    loginWindow.close()
+  }
+})
+
+ipcMain.on('minimize-window', () => {
+  if (loginWindow) {
+    loginWindow.minimize()
+  }
+})
+
+app.whenReady().then(() => {
+  createLoginWindow()
+
+  // 设置 Dock 图标和应用名称
+  // if (process.platform === 'darwin') {
+  //   // const dockIcon = nativeImage.createFromPath(path.join(__dirname, '../../assets/icon.icns')) // 使用 .icns 格式的图标
+  //   // app.dock.setIcon(dockIcon)
+  //   app.dock.setBadge('秦风工具箱') // 设置应用名称提示
+  // }
+
+  // // 设置 Windows 任务栏图标和应用名称
+  if (process.platform === 'win32') {
+    const appIcon = nativeImage.createFromPath(path.join(__dirname, '../../public/icon.ico')) // 使用 .ico 格式的图标
+    app.setAppUserModelId('秦风工具箱') // 设置应用名称提示
+    app.setUserTasks([
+      {
+        program: process.execPath,
+        arguments: '--new-window',
+        iconPath: appIcon.toDataURL(),
+        iconIndex: 0,
+        title: '秦风工具箱',
+        description: '秦风工具箱 Description'
+      }
+    ])
+  }
+})
 
 app.on('window-all-closed', () => {
   loginWindow = null

@@ -27,6 +27,8 @@ interface ElectronAPI {
   login: () => void
   onMessage: (callback: (message: string) => void) => () => void
   openWindow: (hash: string) => Promise<void>
+  closeWindow: () => void
+  minimizeWindow: () => void
 }
 
 // 扩展 Window 接口
