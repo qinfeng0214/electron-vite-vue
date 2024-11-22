@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="slide-fade">
     <div class="container" v-if="showLogin">
       <div class="inner-container">
         <div class="header">
@@ -44,6 +44,7 @@
 </template>
 
 <script setup lang="ts">
+onMounted(() => (showLogin.value = true))
 import type { FormInstance, FormRules } from 'element-plus'
 // const router = useRouter()
 const formRef = ref<FormInstance>()
@@ -57,7 +58,7 @@ const rules = ref<FormRules>({
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
 
-const showLogin = ref(true)
+const showLogin = ref(false)
 
 const onSubmit = async () => {
   if (!formRef.value) return
@@ -162,12 +163,15 @@ const onSubmit = async () => {
     margin-left: 16px;
   }
 }
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
+.slide-fade-enter-active {
+  transition: all 0.5s ease-out;
 }
-.fade-enter,
-.fade-leave-to {
+.slide-fade-leave-active {
+  transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter-from,
+.slide-fade-leave-to {
   opacity: 0;
+  transform: translateX(20px);
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="slide-fade">
     <div class="container" v-if="showRegister">
       <div class="image-container">
         <div class="image-wrapper">
@@ -118,7 +118,8 @@ const registerRules = ref<FormRules>({
   ]
 })
 
-const showRegister = ref(true)
+const showRegister = ref(false)
+onMounted(() => (showRegister.value = true))
 
 const onSubmit = async () => {
   if (!registerFormRef.value) return
@@ -221,12 +222,15 @@ const onSubmit = async () => {
     margin-left: 16px;
   }
 }
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
+.slide-fade-enter-active {
+  transition: all 0.5s ease-out;
 }
-.fade-enter,
-.fade-leave-to {
+.slide-fade-leave-active {
+  transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter-from,
+.slide-fade-leave-to {
   opacity: 0;
+  transform: translateX(20px);
 }
 </style>
