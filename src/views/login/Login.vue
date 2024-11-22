@@ -5,47 +5,41 @@
         <p class="title">登录</p>
         <p class="subtitle">每一次登录都是与你の邂逅。</p>
       </div>
-      <form class="form">
-        <div>
-          <div class="input-block">
-            <!-- <input
-              class="input-field" placeholder="邮箱"
-              type="email"> -->
-            <el-input class="input-field" placeholder="账号"></el-input>
+      <el-form class="form" :model="form">
+        <el-form-item>
+          <el-input class="input-field" v-model="form.username" placeholder="账号"></el-input>
+        </el-form-item>
+        <el-form-item class="space-y">
+          <el-input class="input-field" v-model="form.password" placeholder="密码"></el-input>
+        </el-form-item>
+        <el-form-item class="space-y">
+          <el-checkbox v-model="form.isRemember" label="记住密码" size="large" />
+          <div class="link-group">
+            <a class="link" href="">忘记密码</a>
+            <a class="separator">/</a>
+            <router-link to="/register" class="link">注册</router-link>
           </div>
-          <div class="input-block space-y">
-            <!-- <input class="input-field" placeholder="密码" type="password" /> -->
-            <el-input class="input-field" placeholder="密码"></el-input>
-          </div>
-          <div class="checkbox-group space-y">
-            <div class="checkbox-block">
-              <label class="checkbox-container">
-                <input type="checkbox" name="checked-demo" value="1" class="checkbox" />
-                <span class="checkbox-label">记住密码</span>
-              </label>
-            </div>
-            <div class="link-group">
-              <a class="link" href="">忘记密码</a>
-              <a class="separator">/</a>
-              <router-link to="/register" class="link">注册</router-link>
-            </div>
-          </div>
-        </div>
-        <div class="button-block">
-          <!-- <button class="submit-button" type="submit">登 录</button> -->
-          <el-button class="submit-button">登 录</el-button>
-        </div>
-      </form>
+        </el-form-item>
+        <el-form-item class="space-y">
+          <el-button class="submit-button" type="primary">登 录</el-button>
+        </el-form-item>
+      </el-form>
     </div>
     <div class="image-container">
       <div class="image-wrapper">
-        <img src="https://cdn.jsdelivr.net/gh/MarleneJiang/ImgHosting/img/202109080857232.png" alt="">
+        <!-- <img src="https://cdn.jsdelivr.net/gh/MarleneJiang/ImgHosting/img/202109080857232.png" alt=""> -->
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+const form = ref({
+  username: '',
+  password: '',
+  isRemember: false
+})
+</script>
 
 <style>
 .container {
@@ -71,13 +65,14 @@
   color: #f56692;
 }
 .subtitle {
+  margin-top: 14px;
   color: #6b7280;
 }
 .form {
   margin-top: 28px;
 }
-.input-block {
-  display: block;
+.el-form-item {
+  margin-bottom: 0;
 }
 .space-y {
   margin-top: 24px;
@@ -86,77 +81,36 @@
   width: 100%;
   height: 48px;
   border-color: #d4d4d8;
-  border-radius: 8px !important;
-  outline: none;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
 }
-.input-field:focus {
-  border-color: #f56692;
-  box-shadow: 0 0 0 1px #f56692;
-}
-.checkbox-group {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 16px;
-}
-.checkbox-block {
-  grid-column: 1 / 4;
-}
-.checkbox-container {
+.el-form-item__content {
   display: flex;
-  gap: 12px;
-  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
-.checkbox {
-  width: 1rem;
-  height: 1rem;
-  appearance: none;
-  background-color: #fff;
-  border: 1px solid #d4d4d8;
-  border-radius: 0.25rem;
-  transition:
-    background-color 0.2s,
-    border-color 0.2s;
+.el-checkbox__inner {
+  width: 16px !important;
+  height: 16px !important;
 }
-.checkbox:checked {
-  background-color: #f56692;
-  border-color: transparent;
-}
-.checkbox:focus {
-  outline: none;
-}
-.checkbox-label {
-  font-weight: 500;
-  color: #6b7280;
+.el-checkbox__label {
+  font-size: 16px !important;
 }
 .link-group {
-  grid-column: span 3 / span 3;
-  grid-column-end: 8;
+  display: flex;
+  align-items: center;
 }
 .link {
+  font-size: 16px;
   color: #f56692;
 }
 .separator {
-  margin: 0 8px;
-}
-.button-block {
-  margin-top: 28px;
+  margin: 0 4px;
+  font-size: 16px;
 }
 .submit-button {
   width: 100%;
   height: 48px;
-  font-size: 1.5rem;
-  color: #fff;
-  letter-spacing: 0.1em;
-  background-color: #f56692;
-  border-radius: 8px;
-  transition: background-color 0.2s;
-}
-.submit-button:hover,
-.submit-button:focus {
-  background-color: #f34278;
+  font-size: 20px;
+  letter-spacing: 3px;
 }
 .image-container {
   width: 50%;
@@ -168,11 +122,11 @@
 .image-wrapper {
   width: 83%;
   height: 100%;
-  img{
-    width:375px;
+  img {
+    width: 375px;
     height: 574.5px;
     margin-top: -80px;
-    margin-left:16px;
+    margin-left: 16px;
   }
 }
 #app {

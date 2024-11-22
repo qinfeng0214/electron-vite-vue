@@ -80,12 +80,12 @@ time,
 mark,
 audio,
 video {
-	padding: 0;
-	margin: 0;
-	font: inherit;
-	font-size: 100%;
-	vertical-align: baseline;
-	border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+  border: 0;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -100,30 +100,30 @@ hgroup,
 menu,
 nav,
 section {
-	display: block;
+  display: block;
 }
 body {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
 }
 ol,
 ul {
-	list-style: none;
+  list-style: none;
 }
 blockquote,
 q {
-	quotes: none;
+  quotes: none;
 }
 blockquote::before,
 blockquote::after,
 q::before,
 q::after {
-	content: "";
-	content: none;
+  content: '';
+  content: none;
 }
 table {
-	border-spacing: 0;
-	border-collapse: collapse;
+  border-spacing: 0;
+  border-collapse: collapse;
 }
 html,
 body,
@@ -140,6 +140,12 @@ body,
   font-size: 2em;
 }
 
-img{
+/* 解决图片底部留白问题 */
+img {
   display: block;
+}
+
+/* 解决a标签下划线 */
+a {
+  text-decoration: none;
 }

@@ -38,10 +38,12 @@ export default defineConfig(({ command }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          // 引入多个 css 文件 reset.scss 、common.scss、var.scss
-          // additionalData: `
-          //   @use "@/styles/index";
-          // `
+          additionalData: `
+            @use "@/styles/reset.scss" as *;
+            @use "@/styles/element.scss" as *;
+            @use "element-plus/theme-chalk/src/dark/css-vars.scss" as *;
+            @use "@/styles/dark.scss" as *;
+          `
         }
       }
     },
@@ -59,7 +61,7 @@ export default defineConfig(({ command }) => {
             }
           }),
           ElementPlusResolver({
-            importStyle: 'css'
+            importStyle: 'sass'
           })
         ],
         dts: path.resolve(pathSrc + '/types', 'components.d.ts'), // 指定自动导入函数TS类型声明文件路径
@@ -74,7 +76,7 @@ export default defineConfig(({ command }) => {
             prefix: 'Icon'
           }),
           ElementPlusResolver({
-            importStyle: 'css'
+            importStyle: 'sass'
           })
         ],
         dts: path.resolve(pathSrc + '/types', 'auto-imports.d.ts') // 指定自动导入函数TS类型声明文件路径
