@@ -63,8 +63,8 @@ async function createLoginWindow() {
 async function createMainWindow() {
   mainWindow = new BrowserWindow({
     title: 'Main window',
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 900,
     // icon: path.join(process.env.VITE_PUBLIC, process.platform === 'darwin' ? 'icon.icns' : 'icon.ico'), // 使用 .ico 或 .icns 格式的图标
     webPreferences: {
       preload,

@@ -134,6 +134,14 @@ body,
   padding: 0;
   margin: 0;
 }
+#app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://cdn.jsdelivr.net/gh/MarleneJiang/ImgHosting/img/202109041905856.png');
+  background-attachment: fixed;
+  background-size: cover;
+}
 
 /* 解决 h1 标签在 webkit 内核浏览器中文字大小失效问题 */
 :-webkit-any(article, aside, nav, section) h1 {
