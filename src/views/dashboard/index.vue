@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <h1>欢迎使用秦风工具箱</h1>
+    <h1>欢迎使用</h1>
     <!-- 添加仪表盘内容 -->
   </div>
 </template>

@@ -2,11 +2,13 @@
 :root {
   // 主色调
   --el-color-primary: #f56692; // 品牌主色
+  --el-color-primary-light-1: #f8a1b1;
+  --el-color-primary-light-2: #f8b7bf;
   --el-color-primary-light-3: #f89cb6;
+  --el-color-primary-light-4: #fab2c4;
   --el-color-primary-light-5: #fac0d2;
   --el-color-primary-light-7: #fcd4e1;
   --el-color-primary-light-9: #fef2f5;
-  --el-color-primary-dark-2: #c45275;
 
   // 功能色
   --el-color-success: #67c23a;
@@ -46,6 +48,14 @@
   --el-button-focus-bg-color: #f34278;
   --el-button-focus-border-color: #f34278;
 
+  // 菜单相关变量
+  --el-menu-bg-color: #fff;
+  --el-menu-text-color: #303133;
+  --el-menu-text-color-active: #f34278;
+  --el-menu-text-color-hover: #f34278;
+  --el-menu-text-color-disabled: #c0c4cc;
+  --el-menu-border-color: #e4e7ed;
+
   // 自定义变量
   --base-bg-color: rgb(255 255 255 / 80%);
   --base-bg-color-1: linear-gradient(117.76deg, rgb(255 255 255 / 70%) -7.21%, rgb(255 255 255 / 50%) 118.08%);
@@ -55,6 +65,8 @@
 html.dark {
   // 主色调
   --el-color-primary: #f56692; // 保持品牌色一致
+  --el-color-primary-light-1: #f8a1b1;
+  --el-color-primary-light-2: #f8b7bf;
   --el-color-primary-light-3: #c45275;
   --el-color-primary-light-5: #933d59;
   --el-color-primary-light-7: #62283b;

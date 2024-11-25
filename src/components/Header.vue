@@ -2,8 +2,8 @@
   <div class="header-container">
     <div class="left">
       <el-icon class="toggle-sidebar" @click="toggleSidebar">
-        <Fold v-if="isCollapse" />
-        <Expand v-else />
+        <IconEpFold v-if="isCollapse" />
+        <IconEpExpand v-else />
       </el-icon>
     </div>
     <div class="right">
@@ -25,7 +25,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { Fold, Expand } from '@element-plus/icons-vue'
 
 const router = useRouter()
 const isCollapse = ref(false)
@@ -47,6 +46,7 @@ const handleLogout = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   height: 100%;
 }
 .toggle-sidebar {

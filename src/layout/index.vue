@@ -5,7 +5,7 @@
         <TheSidebar />
       </el-aside>
       <el-container>
-        <el-header height="60px">
+        <el-header height="50px">
           <TheHeader />
         </el-header>
         <el-main>
