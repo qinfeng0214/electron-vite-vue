@@ -1,5 +1,5 @@
 <template>
-  <transition name="slide-fade">
+  <transition name="slide-left">
     <div class="container" v-if="showRegister">
       <div class="image-container">
         <div class="image-wrapper">
@@ -147,7 +147,7 @@ const onSubmit = async () => {
 .inner-container {
   width: 50%;
   padding: 32px 24px;
-  background: rgb(255 255 255 / 80%);
+  background: var(--base-bg-color);
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   box-shadow: 0 5px 10px 0 rgb(0 0 0 / 10%);
@@ -207,7 +207,7 @@ const onSubmit = async () => {
 }
 .image-container {
   width: 50%;
-  background: linear-gradient(117.76deg, rgb(255 255 255 / 70%) -7.21%, rgb(255 255 255 / 50%) 118.08%);
+  background: var(--base-bg-color-1);
   backdrop-filter: blur(8px);
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -221,16 +221,5 @@ const onSubmit = async () => {
     margin-top: -80px;
     margin-left: 16px;
   }
-}
-.slide-fade-enter-active {
-  transition: all 0.5s ease-out;
-}
-.slide-fade-leave-active {
-  transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  opacity: 0;
-  transform: translateX(20px);
 }
 </style>

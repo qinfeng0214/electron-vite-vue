@@ -73,7 +73,7 @@ const onSubmit = async () => {
   padding: 32px;
   background: linear-gradient(117.76deg, rgb(255 255 255 / 70%) -7.21%, rgb(255 255 255 / 50%) 118.08%);
   backdrop-filter: blur(8px);
-  border-radius: 8px;
+  border-radius: var(--el-border-radius-base);
   box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
 }
 .header {

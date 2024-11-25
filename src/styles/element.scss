@@ -33,7 +33,7 @@
   --el-bg-color-overlay: #fff;
 
   // 其他
-  --el-border-radius-base: 8px;
+  --el-border-radius-base: 12px;
   --el-font-size-base: 14px;
 
   // 按钮相关变量
@@ -45,6 +45,10 @@
   --el-button-active-border-color: #f34278;
   --el-button-focus-bg-color: #f34278;
   --el-button-focus-border-color: #f34278;
+
+  // 自定义变量
+  --base-bg-color: rgb(255 255 255 / 80%);
+  --base-bg-color-1: linear-gradient(117.76deg, rgb(255 255 255 / 70%) -7.21%, rgb(255 255 255 / 50%) 118.08%);
 }
 
 // 暗黑模式
@@ -82,7 +86,7 @@ html.dark {
   --el-bg-color-overlay: #1d1e1f;
 
   // 保持其他属性一致
-  --el-border-radius-base: 8px;
+  --el-border-radius-base: 12px;
   --el-font-size-base: 14px;
 
   // 按钮暗黑模式变量（保持与亮色模式一致）
@@ -94,6 +98,10 @@ html.dark {
   --el-button-active-border-color: #f34278;
   --el-button-focus-bg-color: #f34278;
   --el-button-focus-border-color: #f34278;
+
+  // 自定义变量
+  --base-bg-color: rgb(48 48 48 / 80%);
+  --base-bg-color-1: linear-gradient(117.76deg, rgb(48 48 48 / 70%) -7.21%, rgb(48 48 48 / 50%) 118.08%);
 }
 
 // 强制覆盖按钮样式

@@ -101,15 +101,42 @@ ipcMain.on('login-success', () => {
   }
 })
 
-ipcMain.on('close-window', () => {
-  if (loginWindow) {
-    loginWindow.close()
+ipcMain.on('logout-success', () => {
+  if (mainWindow) {
+    mainWindow.close()
+    createLoginWindow()
   }
 })
 
-ipcMain.on('minimize-window', () => {
-  if (loginWindow) {
+ipcMain.on('close-window', (_, windowName) => {
+  if (windowName === 'login' && loginWindow) {
+    loginWindow.close()
+  } else if (windowName === 'main' && mainWindow) {
+    mainWindow.close()
+  }
+})
+
+ipcMain.on('minimize-window', (_, windowName) => {
+  if (windowName === 'login' && loginWindow) {
     loginWindow.minimize()
+  } else if (windowName === 'main' && mainWindow) {
+    mainWindow.minimize()
+  }
+})
+
+ipcMain.on('open-window', (_, windowName) => {
+  if (windowName === 'login') {
+    if (!loginWindow) {
+      createLoginWindow()
+    } else {
+      loginWindow.show()
+    }
+  } else if (windowName === 'main') {
+    if (!mainWindow) {
+      createMainWindow()
+    } else {
+      mainWindow.show()
+    }
   }
 })
 

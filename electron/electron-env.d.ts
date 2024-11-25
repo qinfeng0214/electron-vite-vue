@@ -25,10 +25,11 @@ declare namespace NodeJS {
 // 定义 ElectronAPI 接口
 interface ElectronAPI {
   login: () => void
+  logout: () => void
   onMessage: (callback: (message: string) => void) => () => void
-  openWindow: (hash: string) => Promise<void>
-  closeWindow: () => void
-  minimizeWindow: () => void
+  openWindow: (windowName: string) => void
+  closeWindow: (windowName: string) => void
+  minimizeWindow: (windowName: string) => void
 }
 
 // 扩展 Window 接口
