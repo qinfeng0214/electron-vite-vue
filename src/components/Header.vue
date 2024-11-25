@@ -10,8 +10,14 @@
       <!-- 主题切换按钮 -->
       <el-button text circle @click="handleToggleDark">
         <el-icon>
-          <IconSolarSunBold v-if="!isDark" />
-          <IconSolarMoonBold v-else />
+          <transition name="icon-fade" mode="out-in">
+            <span key="icon-sun" v-if="!isDark">
+              <IconSolarMoonBold />
+            </span>
+            <span key="icon-moon" v-else>
+              <IconSolarSunBold />
+            </span>
+          </transition>
         </el-icon>
       </el-button>
       <el-dropdown>
@@ -79,6 +85,8 @@ const handleToggleDark = (event: MouseEvent): void => {
         pseudoElement: isDarkMode ? '::view-transition-old(root)' : '::view-transition-new(root)'
       }
     )
+    // 持久化主题状态
+    localStorage.setItem('isDark', isDarkMode ? 'true' : 'false')
   })
 }
 </script>
@@ -104,10 +112,36 @@ const handleToggleDark = (event: MouseEvent): void => {
 .username {
   margin-left: 8px;
 }
-
-/* .el-button:not(.is-disabled):hover,
+.el-button:not(.is-disabled):hover,
 .el-button:not(.is-disabled):focus {
+  color: var(--el-text-color-primary) !important;
   background: transparent !important;
-  border: none;
-} */
+}
+.el-button:not(.is-disabled):hover {
+  background: var(--el-text-color-disabled) !important;
+}
+
+/* 过渡动画 */
+.icon-fade-enter-active,
+.icon-fade-leave-active {
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+}
+.icon-fade-enter-from {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+.icon-fade-enter-to {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+.icon-fade-leave-from {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+.icon-fade-leave-to {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
 </style>

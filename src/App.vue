@@ -3,9 +3,13 @@
 </template>
 
 <script setup lang="ts">
-//  import IconEpSunny from '~icons/ep/sunny';
-//  import IconEpMoon from '~icons/ep/moon';
-
-// const isDark = useDark()
-// const toggleDark = () => useToggle(isDark)
+const isLoggedIn = ref(false)
+onMounted(() => {
+  const savedDark = localStorage.getItem('isDark') === 'true'
+  if (savedDark !== useDark().value) {
+    useToggle(useDark())()
+  }
+  const userInfo = localStorage.getItem('userInfo')
+  isLoggedIn.value = !!userInfo
+})
 </script>
