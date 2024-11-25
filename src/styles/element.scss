@@ -111,6 +111,15 @@ html.dark {
   --el-button-focus-bg-color: #f34278;
   --el-button-focus-border-color: #f34278;
 
+    // 菜单相关变量
+  --el-menu-bg-color: #141414;
+  --el-menu-text-color: #e5eaf3;
+  --el-menu-text-color-active: #f34278;
+  --el-menu-text-color-hover: #f34278;
+  --el-menu-text-color-disabled: #6c6e72;
+  --el-menu-border-color: #4c4d4f;
+
+
   // 自定义变量
   --base-bg-color: rgb(48 48 48 / 80%);
   --base-bg-color-1: linear-gradient(117.76deg, rgb(48 48 48 / 70%) -7.21%, rgb(48 48 48 / 50%) 118.08%);

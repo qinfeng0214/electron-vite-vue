@@ -28,14 +28,14 @@ import TheHeader from '../components/Header.vue'
   height: 100%;
 }
 .el-aside {
-  color: var(--el-color-white);
-  background-color: var(--el-color-primary);
+  color: var(--el-text-color-primary);
+  background-color: var(--el-bg-color);
 }
 .el-header {
   display: flex;
   align-items: center;
   padding: 0 20px;
-  background-color: var(--el-color-white);
+  background-color: var(--el-bg-color);
   border-bottom: 1px solid var(--el-border-color-base);
 }
 .el-main {
