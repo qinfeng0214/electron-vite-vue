@@ -1,24 +1,18 @@
 {
   "editor.formatOnSave": true,
-	"editor.codeActionsOnSave": {
+  "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": "explicit"
   },
-	"stylelint.enable": true,
-	"stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass", "html"],
-	"files.eol": "\n",
+  "stylelint.enable": true,
+  "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass", "html"],
+  "files.eol": "\n",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.tsc.autoDetect": "off",
   "json.schemas": [
     {
-      "fileMatch": [
-        "/*electron-builder.json5",
-        "/*electron-builder.json"
-      ],
+      "fileMatch": ["/*electron-builder.json5", "/*electron-builder.json"],
       "url": "https://json.schemastore.org/electron-builder"
     }
   ],
-  "cSpell.words": [
-    "commitlint",
-    "vueuse"
-  ]
+  "cSpell.words": ["commitlint", "Echarts", "vueuse"]
 }

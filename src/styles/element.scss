@@ -1,14 +1,15 @@
+@use 'element-plus/theme-chalk/src/dark/css-vars.scss' as *;
+
 // 默认主题（明亮模式）
 :root {
-  // 主色调
-  --el-color-primary: #f56692; // 品牌主色
-  --el-color-primary-light-1: #f8a1b1;
-  --el-color-primary-light-2: #f8b7bf;
-  --el-color-primary-light-3: #f89cb6;
-  --el-color-primary-light-4: #fab2c4;
-  --el-color-primary-light-5: #fac0d2;
-  --el-color-primary-light-7: #fcd4e1;
-  --el-color-primary-light-9: #fef2f5;
+  // 主色调 - 以 #f56692 为基准
+  --el-color-primary: #f56692; /* 主色 */
+  --el-color-primary-light-3: rgb(247 153 176);
+  --el-color-primary-light-5: rgb(250 181 197);
+  --el-color-primary-light-7: rgb(252 210 219);
+  --el-color-primary-light-8: rgb(253 225 230);
+  --el-color-primary-light-9: rgb(254 240 243);
+  --el-color-primary-dark-2: rgb(204 86 121);
 
   // 功能色
   --el-color-success: #67c23a;
@@ -29,32 +30,69 @@
   --el-border-color-lighter: #ebeef5;
   --el-border-color-extra-light: #f2f6fc;
 
-  // 背景颜色
-  --el-bg-color: #fff;
-  --el-bg-color-page: #f2f3f5;
-  --el-bg-color-overlay: #fff;
-
   // 其他
   --el-border-radius-base: 12px;
   --el-font-size-base: 14px;
 
-  // 按钮相关变量
-  --el-button-bg-color: #f56692;
-  --el-button-hover-bg-color: #f34278;
-  --el-button-hover-text-color: #fff;
-  --el-button-hover-border-color: #f34278;
-  --el-button-active-bg-color: #f34278;
-  --el-button-active-border-color: #f34278;
-  --el-button-focus-bg-color: #f34278;
-  --el-button-focus-border-color: #f34278;
+  // 背景颜色
+  --el-bg-color: #fff;
+  --el-bg-color-page: #f9f9fb;
+  --el-bg-color-overlay: #f0f0f0;
 
-  // 菜单相关变量
-  --el-menu-bg-color: #fff;
-  --el-menu-text-color: #303133;
-  --el-menu-text-color-active: #f34278;
-  --el-menu-text-color-hover: #f34278;
-  --el-menu-text-color-disabled: #c0c4cc;
-  --el-menu-border-color: #e4e7ed;
+  /* 填充色 */
+  --el-fill-color: #f7f8fa; /* 默认填充 */
+  --el-fill-color-light: #f9fafc; /* 浅填充 */
+  --el-fill-color-lighter: #fafafa; /* 更浅填充 */
+  --el-fill-color-extra-light: #fcfcfc; /* 最浅填充 */
+
+  // 按钮相关变量
+  --el-button-hover-bg-color: var(--el-color-primary-light-3);
+  --el-button-active-bg-color: var(--el-color-primary-dark-2);
+  --el-button-hover-text-color: #fff;
+  --el-button-hover-border-color: var(--el-color-primary-light-3);
+  --el-button-active-border-color: var(--el-color-primary-dark-2);
+  --el-button-focus-bg-color: var(--el-color-primary-light-1);
+  --el-button-focus-border-color: var(--el-color-primary-light-1);
+
+  /* 阴影 */
+  --el-box-shadow: 0px 12px 32px 4px rgb(0 0 0 / 4%), 0px 8px 20px rgb(0 0 0 / 8%);
+  --el-box-shadow-hover: 0px 12px 32px 4px rgb(0 0 0 / 8%), 0px 8px 20px rgb(0 0 0 / 12%);
+
+  /* el-menu 配色 */
+  --el-menu-bg-color: #fff; /* 菜单背景色 */
+  --el-menu-hover-bg-color: rgb(234 234 235); /* 菜单项悬浮背景 */
+  .el-menu-item.is-active {
+    color: #fafafa;
+    background-color: #f56692 !important;
+  }
+  .el-menu-item:hover {
+    color: rgb(50 54 57);
+  }
+
+  --el-menu-text-color: #606266; /* 菜单文字颜色 */
+  --el-menu-hover-text-color: #303133 !important; /* 悬浮菜单文字颜色 */
+  --el-menu-active-text-color: #fff; /* 活跃菜单文字颜色 */
+  --el-menu-border-color: #ebeef5; /* 菜单边框颜色 */
+
+  /* el-card 配色 */
+  --el-card-bg-color: #fff; /* 卡片背景 */
+  --el-card-border-color: #ebeef5; /* 卡片边框 */
+  --el-card-border-radius: 12px !important; /* 卡片圆角 */
+  --el-card-text-color: #303133; /* 卡片文字 */
+
+  /* el-table 配色 */
+  --el-table-bg-color: #fff; /* 表格背景 */
+  --el-table-border-color: #ebeef5; /* 表格边框 */
+  --el-table-header-bg-color: #f9f9fb; /* 表头背景 */
+  --el-table-header-text-color: #909399; /* 表头文字 */
+  --el-table-row-hover-bg-color: #f5f5f5; /* 表格行悬浮背景 */
+  --el-table-row-text-color: #606266; /* 表格行文字 */
+  --el-table-striped-row-bg-color: #fafafa; /* 条纹行背景 */
+
+  // 其他
+  .el-main {
+    background-color: rgb(241 243 246);
+  }
 
   // 自定义变量
   --base-bg-color: rgb(255 255 255 / 80%);
@@ -63,39 +101,50 @@
 
 // 暗黑模式
 html.dark {
-  // 主色调
-  --el-color-primary: #f56692; // 保持品牌色一致
-  --el-color-primary-light-1: #f8a1b1;
-  --el-color-primary-light-2: #f8b7bf;
-  --el-color-primary-light-3: #c45275;
-  --el-color-primary-light-5: #933d59;
-  --el-color-primary-light-7: #62283b;
-  --el-color-primary-light-9: #31141e;
-  --el-color-primary-dark-2: #ff7aa3;
+  /* 主色调 */
+  --el-color-primary: #f56692; /* 主色 */
+  --el-color-primary-light-3: rgb(247 153 176);
+  --el-color-primary-light-5: rgb(250 181 197);
+  --el-color-primary-light-7: rgb(252 210 219);
+  --el-color-primary-light-8: rgb(253 225 230);
+  --el-color-primary-light-9: rgb(254 240 243);
+  --el-color-primary-dark-2: rgb(204 86 121);
 
-  // 功能色（暗色模式下调整亮度）
-  --el-color-success: #95d475;
-  --el-color-warning: #ffd04b;
-  --el-color-danger: #ff7875;
-  --el-color-info: #a6a7ad;
+  /* 辅助色 */
+  --el-color-success: #5cb85c;
+  --el-color-warning: #f0ad4e;
+  --el-color-danger: #d9534f;
+  --el-color-info: #5bc0de;
 
-  // 文字颜色
-  --el-text-color-primary: #e5eaf3;
-  --el-text-color-regular: #cfd3dc;
-  --el-text-color-secondary: #a3a6ad;
-  --el-text-color-placeholder: #8d9095;
-  --el-text-color-disabled: #6c6e72;
+  /* 背景色 */
+  --el-bg-color: #1f1f1f; /* 主背景色 */
+  --el-bg-color-page: #121212; /* 页面背景 */
+  --el-bg-color-overlay: #2a2a2a; /* 浮层背景 */
 
-  // 边框颜色
-  --el-border-color-base: #4c4d4f;
-  --el-border-color-light: #363637;
-  --el-border-color-lighter: #2b2b2c;
-  --el-border-color-extra-light: #1f1f1f;
+  /* 文本色 */
+  --el-text-color-primary: #fafafa; /* 主要文字 */
+  --el-text-color-regular: #c0c4cc; /* 常规文字 */
+  --el-text-color-secondary: #909399; /* 次要文字 */
+  --el-text-color-placeholder: #707070; /* 占位文字 */
 
-  // 背景颜色
-  --el-bg-color: #141414;
-  --el-bg-color-page: #0a0a0a;
-  --el-bg-color-overlay: #1d1e1f;
+  /* 边框色 */
+  --el-border-color: #4f4f4f; /* 默认边框颜色 */
+  --el-border-color-base: #4f4f4f; /* 边框基础色 */
+  --el-border-color-light: #626262; /* 边框浅色 */
+  --el-border-color-lighter: #787878; /* 边框更浅色 */
+  --el-border-color-extra-light: #8e8e8e; /* 边框最浅色 */
+  --el-border-color-dark: #3c3c3c; /* 边框深色 */
+  --el-border-color-darker: #2a2a2a; /* 边框更深色 */
+
+  /* 填充色 */
+  --el-fill-color: #2c2c2c; /* 默认填充 */
+  --el-fill-color-light: #333; /* 浅填充 */
+  --el-fill-color-lighter: #3a3a3a; /* 更浅填充 */
+  --el-fill-color-extra-light: #434343; /* 最浅填充 */
+
+  /* 阴影 */
+  --el-box-shadow: 0px 16px 48px 16px rgb(0 0 0 / 8%), 0px 12px 32px rgb(0 0 0 / 12%);
+  --el-box-shadow-hover: 0px 16px 48px 16px rgb(0 0 0 / 12%), 0px 12px 32px rgb(0 0 0 / 16%);
 
   // 保持其他属性一致
   --el-border-radius-base: 12px;
@@ -111,14 +160,40 @@ html.dark {
   --el-button-focus-bg-color: #f34278;
   --el-button-focus-border-color: #f34278;
 
-    // 菜单相关变量
-  --el-menu-bg-color: #141414;
-  --el-menu-text-color: #e5eaf3;
-  --el-menu-text-color-active: #f34278;
-  --el-menu-text-color-hover: #f34278;
-  --el-menu-text-color-disabled: #6c6e72;
-  --el-menu-border-color: #4c4d4f;
+  /* el-menu 配色 */
+  --el-menu-bg-color: #1f1f1f; /* 菜单背景色 */
+  --el-menu-hover-bg-color: #2c2c2c; /* 菜单项悬浮背景 */
+  .el-menu-item.is-active {
+    color: #fafafa;
+    background-color: #2c2c2c !important;
+  }
+  .el-menu-item:hover {
+    color: #c0c4cc;
+  }
 
+  --el-menu-text-color: rgb(242 242 242 / 80%); /* 菜单文字颜色 */
+  --el-menu-hover-text-color: #fff; /* 悬浮菜单文字颜色 */
+  --el-menu-border-color: #4f4f4f; /* 菜单边框颜色 */
+
+  /* el-card 配色 */
+  --el-card-bg-color: #2a2a2a; /* 卡片背景 */
+  --el-card-border-color: #4f4f4f; /* 卡片边框 */
+  --el-card-text-color: #c0c4cc; /* 卡片文字 */
+  --el-card-shadow: 0px 2px 12px rgb(0 0 0 / 20%); /* 卡片阴影 */
+
+  /* el-table 配色 */
+  --el-table-bg-color: #1f1f1f; /* 表格背景 */
+  --el-table-border-color: #4f4f4f; /* 表格边框 */
+  --el-table-header-bg-color: #2c2c2c; /* 表头背景 */
+  --el-table-header-text-color: #909399; /* 表头文字 */
+  --el-table-row-hover-bg-color: #333; /* 表格行悬浮背景 */
+  --el-table-row-text-color: #c0c4cc; /* 表格行文字 */
+  --el-table-striped-row-bg-color: #2a2a2a; /* 条纹行背景 */
+
+  // 其他
+  .el-main {
+    background-color: var(--el-bg-color);
+  }
 
   // 自定义变量
   --base-bg-color: rgb(48 48 48 / 80%);

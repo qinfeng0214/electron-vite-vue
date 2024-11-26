@@ -10,21 +10,37 @@
 
     <!-- 菜单部分 -->
     <el-menu class="sidebar-menu" :default-active="currentRoute" router>
-      <el-menu-item index="/dashboard">
-        <el-icon><IconIcBaselineDashboard /></el-icon>
-        <span>Dashboard</span>
-      </el-menu-item>
-      <el-menu-item index="/dashboard1">
-        <el-icon><IconSetting /></el-icon>
-        <span>设置</span>
-      </el-menu-item>
-      <!-- 添加更多菜单项 -->
+      <template v-for="route in baseRoutes" :key="route.path">
+        <!-- 处理一级菜单 -->
+        <template v-if="route.children && route.children.length === 1">
+          <el-menu-item :index="route.path + route.children[0].path">
+            <Icon :icon="route.children[0].meta?.icon as string" class="route-icon" />
+            <template #title>{{ route.children[0].meta?.title }}</template>
+          </el-menu-item>
+        </template>
+
+        <!-- 处理带有子菜单的菜单项 -->
+        <el-sub-menu v-else-if="route.children && route.children.length > 1" :index="route.path">
+          <template #title>
+            <Icon :icon="route.meta?.icon as string" class="route-icon" />
+            <span>{{ route.meta?.title }}</span>
+          </template>
+
+          <el-menu-item v-for="child in route.children" :key="child.path" :index="route.path + child.path">
+            <Icon :icon="child.meta?.icon as string" class="route-icon" />
+            <template #title>{{ child.meta?.title }}</template>
+          </el-menu-item>
+        </el-sub-menu>
+      </template>
     </el-menu>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { baseRoutes } from '@/router'
+
+import { Icon } from '@iconify/vue'
+
 const route = useRoute()
 const currentRoute = route.path
 </script>
@@ -84,5 +100,9 @@ const currentRoute = route.path
     height: calc(100vh - 60px);
   }
 }
-</style>
+.route-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
 }
+</style>

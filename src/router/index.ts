@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '@/layout/index.vue'
 
-const routes: Array<RouteRecordRaw> = [
+// 登录相关路由
+const loginRoutes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'Login',
@@ -16,21 +17,34 @@ const routes: Array<RouteRecordRaw> = [
     path: '/forget',
     name: 'Forget',
     component: () => import('@/views/login/ResetPassword.vue')
-  },
+  }
+]
+
+const baseRoutes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/analytics',
+    meta: { title: '概览', icon: 'ic:baseline-dashboard' },
     children: [
       {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index.vue'),
-        name: 'Dashboard',
-        meta: { title: '首页' }
+        path: 'analytics',
+        component: () => import('@/views/overview/analytics/index.vue'),
+        name: 'Analytics',
+        meta: { title: '分析页', icon: 'tdesign:chart-analytics' }
+      },
+      // 工作台
+      {
+        path: 'workspace',
+        component: () => import('@/views/overview/workspace/index.vue'),
+        name: 'Workspace',
+        meta: { title: '工作台', icon: 'bi:person-workspace' }
       }
     ]
   }
 ]
+export { baseRoutes }
+const routes = [...loginRoutes, ...baseRoutes]
 
 export const router = createRouter({
   history: createWebHashHistory(),

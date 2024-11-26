@@ -36,8 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { throttle } from 'lodash-es'
 
 const router = useRouter()
 const isCollapse = ref(false)
@@ -56,39 +55,76 @@ const handleLogout = () => {
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
-const handleToggleDark = (event: MouseEvent): void => {
-  const { clientX, clientY } = event
+let isAnimating = false
+let lastAnimation: Animation | null = null
 
-  // 启动视图过渡
-  const transition = document.startViewTransition(() => {
-    toggleDark()
-  })
+const handleToggleDark = throttle(
+  (event: MouseEvent): void => {
+    // 如果动画正在进行中，直接返回
+    if (isAnimating) return
 
-  // 在过渡准备好后，执行自定义动画
-  transition.ready.then(() => {
-    // 计算半径，以鼠标点击的位置为圆心，到四个角的距离中最大的那个作为半径
-    const radius = Math.hypot(
-      Math.max(clientX, window.innerWidth - clientX),
-      Math.max(clientY, window.innerHeight - clientY)
-    )
-    const clipPath = [`circle(0% at ${clientX}px ${clientY}px)`, `circle(${radius}px at ${clientX}px ${clientY}px)`]
+    const { clientX, clientY } = event
 
-    const isDarkMode = document.documentElement.classList.contains('dark')
+    // 取消之前未完成的动画
+    if (lastAnimation) {
+      lastAnimation.cancel()
+    }
 
-    // 自定义动画
-    document.documentElement.animate(
-      {
-        clipPath: isDarkMode ? clipPath.reverse() : clipPath
-      },
-      {
-        duration: 500,
-        pseudoElement: isDarkMode ? '::view-transition-old(root)' : '::view-transition-new(root)'
-      }
-    )
-    // 持久化主题状态
-    localStorage.setItem('isDark', isDarkMode ? 'true' : 'false')
-  })
-}
+    isAnimating = true
+
+    const transition = document.startViewTransition(() => {
+      toggleDark()
+    })
+
+    transition.ready.then(() => {
+      requestAnimationFrame(() => {
+        const radius = Math.hypot(
+          Math.max(clientX, window.innerWidth - clientX),
+          Math.max(clientY, window.innerHeight - clientY)
+        )
+
+        const clipPath = [`circle(0% at ${clientX}px ${clientY}px)`, `circle(${radius}px at ${clientX}px ${clientY}px)`]
+
+        const isDarkMode = document.documentElement.classList.contains('dark')
+
+        const animation = document.documentElement.animate(
+          {
+            clipPath: isDarkMode ? clipPath.reverse() : clipPath
+          },
+          {
+            duration: 500,
+            easing: 'ease-out',
+            pseudoElement: isDarkMode ? '::view-transition-old(root)' : '::view-transition-new(root)'
+          }
+        )
+
+        lastAnimation = animation
+
+        animation.onfinish = () => {
+          isAnimating = false
+          lastAnimation = null
+          localStorage.setItem('isDark', isDarkMode ? 'true' : 'false')
+        }
+
+        animation.oncancel = () => {
+          isAnimating = false
+          lastAnimation = null
+        }
+      })
+    })
+  },
+  500,
+  { leading: true, trailing: false }
+)
+
+// 组件卸载时清理
+onUnmounted(() => {
+  if (lastAnimation) {
+    lastAnimation.cancel()
+  }
+  // 取消节流函数的定时器
+  handleToggleDark.cancel()
+})
 </script>
 
 <style scoped>

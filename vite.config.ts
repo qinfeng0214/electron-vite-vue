@@ -38,11 +38,11 @@ export default defineConfig(({ command }) => {
     css: {
       preprocessorOptions: {
         scss: {
+          api: 'modern-compiler',
           additionalData: `
             @use "@/styles/reset.scss" as *;
-            @use "@/styles/element.scss" as *;
             @use "element-plus/theme-chalk/src/dark/css-vars.scss" as *;
-            @use "@/styles/dark.scss" as *;
+            @use "@/styles/element.scss" as *;
           `
         }
       }
