@@ -34,7 +34,7 @@ async function createLoginWindow() {
     title: 'Login',
     width: 1000,
     height: 750,
-    // icon: path.join(process.env.VITE_PUBLIC, process.platform === 'darwin' ? 'icon.icns' : 'icon.ico'), // 使用 .ico 或 .icns 格式的图标
+    icon: path.join(process.env.VITE_PUBLIC, process.platform === 'darwin' ? 'icon.png' : 'icon.ico'), // 使用 .ico 或 .icns 格式的图标
     resizable: false,
     frame: false, // 禁用原生标题栏
     webPreferences: {
@@ -65,7 +65,7 @@ async function createMainWindow() {
     title: 'Main window',
     width: 1200,
     height: 900,
-    // icon: path.join(process.env.VITE_PUBLIC, process.platform === 'darwin' ? 'icon.icns' : 'icon.ico'), // 使用 .ico 或 .icns 格式的图标
+    icon: path.join(process.env.VITE_PUBLIC, process.platform === 'darwin' ? 'icon.png' : 'icon.ico'), // 使用 .ico 或 .icns 格式的图标
     webPreferences: {
       preload,
       nodeIntegration: false,
