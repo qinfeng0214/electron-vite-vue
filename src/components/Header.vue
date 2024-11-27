@@ -31,6 +31,12 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
+      <!-- 自定义窗口控制按钮 -->
+      <div class="window-controls">
+        <el-button @click="minimizeWindow">—</el-button>
+        <el-button @click="toggleMaximizeWindow">☐</el-button>
+        <el-button @click="closeWindow">✕</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -125,6 +131,23 @@ onUnmounted(() => {
   // 取消节流函数的定时器
   handleToggleDark.cancel()
 })
+
+// 窗口控制函数
+const minimizeWindow = () => {
+  window.electronAPI.minimizeWindow('main')
+}
+
+const toggleMaximizeWindow = () => {
+  // if (window.electronAPI.isMaximized()) {
+  //   window.electronAPI.unmaximize()
+  // } else {
+  //   window.electronAPI.maximize()
+  // }
+}
+
+const closeWindow = () => {
+  window.electronAPI.closeWindow('main')
+}
 </script>
 
 <style scoped>
@@ -155,6 +178,37 @@ onUnmounted(() => {
 }
 .el-button:not(.is-disabled):hover {
   background: var(--el-text-color-disabled) !important;
+}
+.right {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  column-gap: 16px;
+}
+:deep(.el-tooltip__trigger:focus-visible) {
+  outline: unset;
+}
+
+/* 自定义窗口控制按钮样式 */
+.window-controls {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  button {
+    width: 45px;
+    height: 30px;
+    font-size: 16px;
+    color: #000;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    &:hover {
+      background-color: rgb(255 255 255 / 20%);
+    }
+    &:active {
+      background-color: rgb(255 255 255 / 40%);
+    }
+  }
 }
 
 /* 过渡动画 */

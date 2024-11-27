@@ -65,7 +65,7 @@ const onSubmit = async () => {
   try {
     await formRef.value.validate()
     // 模拟登录成功
-    window.electronAPI.logout()
+    window.electronAPI.login()
     router.push('/analytics')
   } catch (error) {
     console.error('登录失败:', error)
