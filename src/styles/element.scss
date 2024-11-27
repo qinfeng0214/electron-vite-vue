@@ -77,8 +77,10 @@
   /* el-card 配色 */
   --el-card-bg-color: #fff; /* 卡片背景 */
   --el-card-border-color: #ebeef5; /* 卡片边框 */
-  --el-card-border-radius: 12px !important; /* 卡片圆角 */
   --el-card-text-color: #303133; /* 卡片文字 */
+  .el-card {
+    border-radius: 12px;
+  }
 
   /* el-table 配色 */
   --el-table-bg-color: #fff; /* 表格背景 */

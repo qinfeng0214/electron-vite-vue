@@ -20,7 +20,7 @@
     <div class="bottom-charts">
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-card>
+          <el-card header="访问数量">
             <!-- <EchartsUI ref="radarChartRef" /> -->
           </el-card>
         </el-col>
