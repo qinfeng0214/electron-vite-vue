@@ -1,21 +1,13 @@
 <template>
-  <div v-bind="$attrs" class="chart"></div>
+  <div v-bind="$attrs" :style="{ width, height }"></div>
 </template>
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
+  interface Props {
     height?: string
     width?: string
-  }>(),
-  {
+  }
+  withDefaults(defineProps<Props>(), {
     height: '300px',
     width: '100%'
-  }
-)
+  })
 </script>
-<style>
-.chart {
-  width: v-bind(width);
-  height: v-bind(height);
-}
-</style>

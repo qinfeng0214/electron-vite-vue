@@ -30,6 +30,8 @@ interface ElectronAPI {
   openWindow: (windowName: string) => void
   closeWindow: (windowName: string) => void
   minimizeWindow: (windowName: string) => void
+  maximizeWindow: (windowName: string) => void
+  onMaximizeChange: (callback: (isMaximized: boolean) => void) => () => void
 }
 
 // 扩展 Window 接口

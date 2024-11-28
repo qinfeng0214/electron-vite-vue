@@ -34,6 +34,7 @@ async function createLoginWindow() {
     title: 'Login',
     width: 1000,
     height: 750,
+
     icon: path.join(process.env.VITE_PUBLIC, process.platform === 'darwin' ? 'icon.png' : 'icon.ico'), // 使用 .ico 或 .icns 格式的图标
     resizable: false,
     titleBarStyle: 'hidden', // 禁用原生标题栏
@@ -66,6 +67,8 @@ async function createMainWindow() {
     width: 1200,
     height: 900,
     titleBarStyle: 'hidden',
+    trafficLightPosition: { x: 10, y: 15 },
+    autoHideMenuBar: true, // 隐藏菜单栏
     icon: path.join(process.env.VITE_PUBLIC, process.platform === 'darwin' ? 'icon.png' : 'icon.ico'), // 使用 .ico 或 .icns 格式的图标
     webPreferences: {
       preload,
@@ -75,7 +78,7 @@ async function createMainWindow() {
     }
   })
 
-  mainWindow.setMenu(null)
+  mainWindow.setMenu(null) // 禁用菜单栏
 
   if (VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(VITE_DEV_SERVER_URL)
@@ -122,6 +125,27 @@ ipcMain.on('minimize-window', (_, windowName) => {
     loginWindow.minimize()
   } else if (windowName === 'main' && mainWindow) {
     mainWindow.minimize()
+  }
+})
+
+// 监听窗口最大化状态变化
+mainWindow?.on('maximize', () => {
+  mainWindow?.webContents.send('window-maximized', true)
+})
+
+mainWindow?.on('unmaximize', () => {
+  mainWindow?.webContents.send('window-maximized', false)
+})
+// 添加最大化/还原窗口的处理
+ipcMain.on('maximize-window', (_, windowName) => {
+  const targetWindow = windowName === 'main' ? mainWindow : loginWindow
+
+  if (!targetWindow) return
+
+  if (targetWindow.isMaximized()) {
+    targetWindow.unmaximize()
+  } else {
+    targetWindow.maximize()
   }
 })
 
