@@ -36,7 +36,7 @@
       </div>
       <div class="image-container">
         <div class="image-wrapper">
-          <!-- <img src="https://cdn.jsdelivr.net/gh/MarleneJiang/ImgHosting/img/202109080857232.png" alt=""> -->
+          <img src="../../../public/login.png" alt="" />
         </div>
       </div>
     </div>
@@ -44,124 +44,128 @@
 </template>
 
 <script setup lang="ts">
-onMounted(() => (showLogin.value = true))
-import type { FormInstance, FormRules } from 'element-plus'
-const router = useRouter()
-const formRef = ref<FormInstance>()
-const form = ref({
-  username: '',
-  password: '',
-  isRemember: false
-})
-const rules = ref<FormRules>({
-  username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
-  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-})
+  onMounted(() => (showLogin.value = true))
+  import type { FormInstance, FormRules } from 'element-plus'
+  const router = useRouter()
+  const formRef = ref<FormInstance>()
+  const form = ref({
+    username: '',
+    password: '',
+    isRemember: false
+  })
+  const rules = ref<FormRules>({
+    username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+    password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+  })
 
-const showLogin = ref(false)
+  const showLogin = ref(false)
 
-const onSubmit = async () => {
-  if (!formRef.value) return
-  try {
-    await formRef.value.validate()
-    // 模拟登录成功
-    window.electronAPI.login()
-    router.push('/analytics')
-  } catch (error) {
-    console.error('登录失败:', error)
+  const onSubmit = async () => {
+    if (!formRef.value) return
+    try {
+      await formRef.value.validate()
+      // 模拟登录成功
+      window.electronAPI.login()
+      router.push('/analytics')
+    } catch (error) {
+      console.error('登录失败:', error)
+    }
   }
-}
-// const resetForm = () => {
-//   if (!formRef.value) return
-//   formRef.value.resetFields()
-// }
+  // const resetForm = () => {
+  //   if (!formRef.value) return
+  //   formRef.value.resetFields()
+  // }
 </script>
 <style scoped lang="scss">
-.container {
-  display: flex;
-  flex-grow: 1;
-  max-width: 820px;
-}
-.inner-container {
-  width: 50%;
-  padding: 32px 24px;
-  background: var(--base-bg-color);
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 10%);
-}
-.header {
-  margin-bottom: 1.75rem;
-}
-.title {
-  margin-bottom: 8px;
-  font-size: 36px;
-  line-height: 40px;
-  color: #f56692;
-}
-.subtitle {
-  margin-top: 14px;
-  color: #6b7280;
-}
-.form {
-  margin-top: 28px;
-}
-.el-form-item {
-  margin-bottom: 0;
-}
-.space-y {
-  margin-top: 24px;
-}
-.input-field {
-  width: 100%;
-  height: 48px;
-  border-color: #d4d4d8;
-}
-:deep(.el-form-item__content) {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-:deep(.el-checkbox__inner) {
-  width: 16px !important;
-  height: 16px !important;
-}
-:deep(.el-checkbox__label) {
-  font-size: 16px !important;
-}
-.link-group {
-  display: flex;
-  align-items: center;
-}
-.link {
-  font-size: 16px;
-  color: #f56692;
-}
-.separator {
-  margin: 0 4px;
-  font-size: 16px;
-}
-.submit-button {
-  width: 100%;
-  height: 48px;
-  font-size: 20px;
-  letter-spacing: 3px;
-}
-.image-container {
-  width: 50%;
-  background: var(--base-bg-color-1);
-  backdrop-filter: blur(8px);
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-.image-wrapper {
-  width: 83%;
-  height: 100%;
-  img {
-    width: 375px;
-    height: 574.5px;
-    margin-top: -80px;
-    margin-left: 16px;
+  .container {
+    display: flex;
+    flex-grow: 1;
+    max-width: 820px;
   }
-}
+  .inner-container {
+    width: 50%;
+    padding: 32px 24px;
+    background: var(--base-bg-color);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    box-shadow:
+      5px 5px 10px rgb(0 0 0 / 10%),
+      -5px -5px 10px rgb(0 0 0 / 10%),
+      -5px 5px 10px rgb(0 0 0 / 10%),
+      5px -5px 10px rgb(0 0 0 / 10%);
+  }
+  .header {
+    margin-bottom: 1.75rem;
+  }
+  .title {
+    margin-bottom: 8px;
+    font-size: 36px;
+    line-height: 40px;
+    color: #f56692;
+  }
+  .subtitle {
+    margin-top: 14px;
+    color: #6b7280;
+  }
+  .form {
+    margin-top: 28px;
+  }
+  .el-form-item {
+    margin-bottom: 0;
+  }
+  .space-y {
+    margin-top: 24px;
+  }
+  .input-field {
+    width: 100%;
+    height: 48px;
+    border-color: #d4d4d8;
+  }
+  :deep(.el-form-item__content) {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  :deep(.el-checkbox__inner) {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  :deep(.el-checkbox__label) {
+    font-size: 16px !important;
+  }
+  .link-group {
+    display: flex;
+    align-items: center;
+  }
+  .link {
+    font-size: 16px;
+    color: #f56692;
+  }
+  .separator {
+    margin: 0 4px;
+    font-size: 16px;
+  }
+  .submit-button {
+    width: 100%;
+    height: 48px;
+    font-size: 20px;
+    letter-spacing: 3px;
+  }
+  .image-container {
+    width: 50%;
+    background: var(--base-bg-color-1);
+    backdrop-filter: blur(8px);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  .image-wrapper {
+    width: 83%;
+    height: 100%;
+    img {
+      width: 375px;
+      height: 574.5px;
+      margin-top: -80px;
+      margin-left: 16px;
+    }
+  }
 </style>
