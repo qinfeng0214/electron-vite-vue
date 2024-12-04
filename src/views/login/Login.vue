@@ -1,42 +1,44 @@
 <template>
   <transition name="slide-right">
-    <div class="container" v-if="showLogin">
-      <div class="inner-container">
-        <div class="header">
-          <p class="title">登录</p>
-          <p class="subtitle">每一次登录都是与你の邂逅。</p>
+    <div class="login-box" v-if="showLogin">
+      <div class="container">
+        <div class="inner-container">
+          <div class="header">
+            <p class="title">登录</p>
+            <p class="subtitle">每一次登录都是与你の邂逅。</p>
+          </div>
+          <el-form class="form" ref="formRef" :model="form" :rules="rules" status-icon>
+            <el-form-item prop="username">
+              <el-input class="input-field" v-model="form.username" placeholder="账号">
+                <template #prefix>
+                  <IconMdiUser />
+                </template>
+              </el-input>
+            </el-form-item>
+            <el-form-item class="space-y" prop="password">
+              <el-input class="input-field" v-model="form.password" type="password" placeholder="密码">
+                <template #prefix>
+                  <IconMdiPassword />
+                </template>
+              </el-input>
+            </el-form-item>
+            <el-form-item class="space-y" prop="remember">
+              <el-checkbox v-model="form.isRemember" label="记住密码" size="large" />
+              <div class="link-group">
+                <router-link to="/forget" class="link">忘记密码</router-link>
+                <a class="separator">/</a>
+                <router-link to="/register" class="link" @click="() => !showLogin">注册</router-link>
+              </div>
+            </el-form-item>
+            <el-form-item class="space-y">
+              <el-button class="submit-button" type="primary" @click="onSubmit">登 录</el-button>
+            </el-form-item>
+          </el-form>
         </div>
-        <el-form class="form" ref="formRef" :model="form" :rules="rules" status-icon>
-          <el-form-item prop="username">
-            <el-input class="input-field" v-model="form.username" placeholder="账号">
-              <template #prefix>
-                <IconMdiUser />
-              </template>
-            </el-input>
-          </el-form-item>
-          <el-form-item class="space-y" prop="password">
-            <el-input class="input-field" v-model="form.password" type="password" placeholder="密码">
-              <template #prefix>
-                <IconMdiPassword />
-              </template>
-            </el-input>
-          </el-form-item>
-          <el-form-item class="space-y" prop="remember">
-            <el-checkbox v-model="form.isRemember" label="记住密码" size="large" />
-            <div class="link-group">
-              <router-link to="/forget" class="link">忘记密码</router-link>
-              <a class="separator">/</a>
-              <router-link to="/register" class="link" @click="() => !showLogin">注册</router-link>
-            </div>
-          </el-form-item>
-          <el-form-item class="space-y">
-            <el-button class="submit-button" type="primary" @click="onSubmit">登 录</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-      <div class="image-container">
-        <div class="image-wrapper">
-          <img src="../../../public/login.png" alt="" />
+        <div class="image-container">
+          <div class="image-wrapper">
+            <img src="../../../public/login.png" alt="" />
+          </div>
         </div>
       </div>
     </div>
@@ -77,6 +79,14 @@
   // }
 </script>
 <style scoped lang="scss">
+  .login-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: var(--el-color-primary-light-7);
+  }
   .container {
     display: flex;
     flex-grow: 1;
@@ -88,11 +98,7 @@
     background: var(--base-bg-color);
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    box-shadow:
-      5px 5px 10px rgb(0 0 0 / 10%),
-      -5px -5px 10px rgb(0 0 0 / 10%),
-      -5px 5px 10px rgb(0 0 0 / 10%),
-      5px -5px 10px rgb(0 0 0 / 10%);
+    box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
   }
   .header {
     margin-bottom: 1.75rem;

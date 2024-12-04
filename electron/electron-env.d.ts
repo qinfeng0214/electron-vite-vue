@@ -26,12 +26,13 @@ declare namespace NodeJS {
 interface ElectronAPI {
   login: () => void
   logout: () => void
-  onMessage: (callback: (message: string) => void) => () => void
-  openWindow: (windowName: string) => void
   closeWindow: (windowName: string) => void
   minimizeWindow: (windowName: string) => void
   maximizeWindow: (windowName: string) => void
+  fullscreenWindow: () => void
   onMaximizeChange: (callback: (isMaximized: boolean) => void) => () => void
+  onFullscreenChange: (callback: (isFullscreen: boolean) => void) => () => void
+  onMessage: (callback: (message: string) => void) => () => void
 }
 
 // 扩展 Window 接口
