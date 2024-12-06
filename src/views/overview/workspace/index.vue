@@ -6,11 +6,11 @@
 </template>
 
 <script setup lang="ts">
-// Dashboard 组件逻辑
+  // Dashboard 组件逻辑
 </script>
 
 <style scoped>
-.dashboard-container {
-  padding: 20px;
-}
+  .dashboard-container {
+    padding: 20px;
+  }
 </style>

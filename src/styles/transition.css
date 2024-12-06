@@ -36,10 +36,10 @@
 }
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: .25s cubic-bezier(0.25, 0.8, 0.5, 1);
+  transition: 0.25s cubic-bezier(0.25, 0.8, 0.5, 1);
 }
 .slide-right-move {
-  transition: transform .3s;
+  transition: transform 0.3s;
 }
 .slide-right-enter-from,
 .slide-right-leave-to {

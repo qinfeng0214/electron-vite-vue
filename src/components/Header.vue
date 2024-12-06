@@ -55,13 +55,16 @@
 <script setup lang="ts">
   import { throttle } from 'lodash-es'
 
-  const router = useRouter()
-  const isCollapse = ref(false)
+  const props = defineProps<{
+    isCollapse: boolean
+    toggleSidebar: () => void
+  }>()
 
   const toggleSidebar = () => {
-    isCollapse.value = !isCollapse.value
+    props.toggleSidebar()
   }
 
+  const router = useRouter()
   const handleLogout = () => {
     // 发送登出请求到主进程
     window.electronAPI.logout()

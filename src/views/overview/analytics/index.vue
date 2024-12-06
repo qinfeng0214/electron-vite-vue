@@ -35,22 +35,22 @@
 </template>
 
 <script setup lang="ts">
-import FlowTrendChart from './FlowTrendChart.vue'
-import VisitTrendChart from './VisitTrendChart.vue'
-import StatisticsCards from './StatisticsCards.vue'
+  import FlowTrendChart from './FlowTrendChart.vue'
+  import VisitTrendChart from './VisitTrendChart.vue'
+  import StatisticsCards from './StatisticsCards.vue'
 
-const selectedChart = ref('flow')
+  const selectedChart = ref('flow')
 </script>
 
 <style scoped>
-.chart-container {
-  margin-bottom: 20px;
-}
-.chart-header {
-  display: flex;
-  margin-bottom: 10px;
-}
-.bottom-charts {
-  margin-top: 20px;
-}
+  .chart-container {
+    margin-bottom: 20px;
+  }
+  .chart-header {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  .bottom-charts {
+    margin-top: 20px;
+  }
 </style>
