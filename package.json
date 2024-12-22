@@ -46,6 +46,7 @@
     "@iconify-json/solar": "^1.2.1",
     "@iconify/vue": "^4.1.2",
     "@stylistic/eslint-plugin": "^2.10.1",
+    "@types/bcryptjs": "^2.4.6",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.14.1",
     "@vitejs/plugin-vue": "^5.0.4",
@@ -85,6 +86,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^11.2.0",
+    "bcryptjs": "^2.4.3",
     "dayjs": "^1.11.13",
     "echarts": "^5.5.1",
     "element-plus": "^2.8.7",

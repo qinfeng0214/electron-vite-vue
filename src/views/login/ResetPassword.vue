@@ -5,6 +5,14 @@
       <p class="subtitle">请输入您的邮箱以重置密码。</p>
     </div>
     <el-form :model="resetForm" :rules="resetRules" ref="resetFormRef" class="form">
+      <!-- 账号 -->
+      <el-form-item prop="account_id">
+        <el-input class="input-field" v-model="resetForm.account_id" placeholder="账号">
+          <template #prefix>
+            <IconMdiUser />
+          </template>
+        </el-input>
+      </el-form-item>
       <el-form-item prop="security_key" class="form-item">
         <el-input class="input-field" v-model="resetForm.security_key" placeholder="安全密钥">
           <template #prefix>
@@ -13,14 +21,14 @@
         </el-input>
       </el-form-item>
       <el-form-item prop="password" class="form-item">
-        <el-input class="input-field" v-model="resetForm.password" placeholder="新密码">
+        <el-input class="input-field" v-model="resetForm.password" type="password" placeholder="新密码">
           <template #prefix>
             <IconMdiPassword />
           </template>
         </el-input>
       </el-form-item>
       <el-form-item prop="confirmPassword" class="form-item">
-        <el-input class="input-field" v-model="resetForm.confirmPassword" placeholder="再次输入密码">
+        <el-input class="input-field" v-model="resetForm.confirmPassword" type="password" placeholder="再次输入密码">
           <template #prefix>
             <IconMdiPassword />
           </template>
@@ -38,10 +46,14 @@
 
 <script setup lang="ts">
   import { reactive, ref } from 'vue'
+  import { resetPassword } from '@/api/user'
   import type { FormInstance } from 'element-plus'
+
+  const router = useRouter()
 
   const resetFormRef = ref<FormInstance>()
   const resetForm = reactive({
+    account_id: '',
     // 密钥Security Key
     security_key: '',
     // 新密码
@@ -59,8 +71,20 @@
 
     try {
       await resetFormRef.value.validate()
-      // 模拟重置密码成功
-      console.log('重置密码成功')
+      // 构建重置密码参数
+      const resetParams = {
+        account_id: resetForm.account_id,
+        security_key: resetForm.security_key,
+        password: resetForm.password
+      }
+      const response = await resetPassword(resetParams)
+
+      if (response.success) {
+        ElMessage.success('密码重置成功！')
+        router.push('/login')
+      } else {
+        ElMessage.error(response.message || '密码重置失败')
+      }
     } catch (error) {
       console.error('重置密码失败:', error)
     }

@@ -8,8 +8,8 @@
             <p class="subtitle">每一次登录都是与你の邂逅。</p>
           </div>
           <el-form class="form" ref="formRef" :model="form" :rules="rules" status-icon>
-            <el-form-item prop="username">
-              <el-input class="input-field" v-model="form.username" placeholder="账号">
+            <el-form-item prop="account_id">
+              <el-input class="input-field" v-model="form.account_id" placeholder="账号">
                 <template #prefix>
                   <IconMdiUser />
                 </template>
@@ -37,7 +37,7 @@
         </div>
         <div class="image-container">
           <div class="image-wrapper">
-            <img src="../../../public/login.png" alt="" />
+            <!-- <img src="../../../public/login.png" alt="" /> -->
           </div>
         </div>
       </div>
@@ -46,17 +46,21 @@
 </template>
 
 <script setup lang="ts">
-  onMounted(() => (showLogin.value = true))
   import type { FormInstance, FormRules } from 'element-plus'
+
+  import { login } from '@/api/user'
+
+  onMounted(() => (showLogin.value = true))
+
   const router = useRouter()
   const formRef = ref<FormInstance>()
   const form = ref({
-    username: '',
+    account_id: '',
     password: '',
     isRemember: false
   })
   const rules = ref<FormRules>({
-    username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+    account_id: [{ required: true, message: '请输入账号', trigger: 'blur' }],
     password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
   })
 
@@ -66,9 +70,41 @@
     if (!formRef.value) return
     try {
       await formRef.value.validate()
-      // 模拟登录成功
-      window.electronAPI.login()
-      router.push('/analytics')
+
+      // 构建登录参数，使用加密后的密码
+      const loginParams = {
+        account_id: form.value.account_id,
+        password: form.value.password,
+        isRemember: form.value.isRemember
+      }
+
+      const response = await login(loginParams)
+      if (response.success && response.token) {
+        // 将 token 保存到 localStorage
+        localStorage.setItem('token', response.token)
+
+        // 显示成功消息
+        ElMessage.success('登录成功！')
+
+        // 如果选择了记住我，可以设置更长时间的存储，或使用其他存储方式
+        if (form.value.isRemember) {
+          // 示例：设置 token 在 localStorage 中永久保存
+          localStorage.setItem('rememberMe', 'true')
+        } else {
+          localStorage.removeItem('rememberMe')
+        }
+
+        // 调用 Electron API（如果适用）
+        if (window.electronAPI && window.electronAPI.login) {
+          window.electronAPI.login()
+        }
+
+        // 跳转到分析页
+        router.push('/analytics')
+      } else {
+        // 处理登录失败的情况，例如显示错误消息
+        ElMessage.error(response.message || '登录失败')
+      }
     } catch (error) {
       console.error('登录失败:', error)
     }

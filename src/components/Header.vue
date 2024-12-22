@@ -23,12 +23,18 @@
       <el-dropdown>
         <span class="user-info">
           <el-avatar :size="32" src="https://avatars.githubusercontent.com/u/1?v=4" />
-          <span class="username">Admin</span>
         </span>
         <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item @click="handleLogout">退出登录</el-dropdown-item>
-          </el-dropdown-menu>
+          <el-card>
+            <template #header>
+              <el-avatar :size="48" src="https://avatars.githubusercontent.com/u/1?v=4" />
+              <span class="username">{{ userInfo?.username }}</span>
+            </template>
+            <el-dropdown-menu>
+              <el-dropdown-item>个人中心</el-dropdown-item>
+              <el-dropdown-item @click="handleLogout">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-card>
         </template>
       </el-dropdown>
       <!-- 自定义窗口控制按钮 -->
@@ -54,6 +60,7 @@
 
 <script setup lang="ts">
   import { throttle } from 'lodash-es'
+  import { getUserInfoApi } from '@/api/user'
 
   const props = defineProps<{
     isCollapse: boolean
@@ -65,6 +72,31 @@
   }
 
   const router = useRouter()
+
+  // 获取用户信息
+  interface UserInfo {
+    username: string
+    user_id: string
+    createdAt: string
+  }
+  // 获取用户信息
+  const userInfo = ref<UserInfo | null>(null)
+  const getUserInfo = async () => {
+    try {
+      const response = await getUserInfoApi()
+      if (response.success) {
+        userInfo.value = response.data || null
+      } else {
+        ElMessage.error(response.message || '获取用户信息失败')
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  onMounted(() => {
+    getUserInfo()
+  })
   const handleLogout = () => {
     // 发送登出请求到主进程
     window.electronAPI.logout()
@@ -204,6 +236,8 @@
   }
   .username {
     margin-left: 8px;
+    font-size: 14px;
+    font-weight: 500;
   }
   .el-button:not(.is-disabled):hover,
   .el-button:not(.is-disabled):focus {

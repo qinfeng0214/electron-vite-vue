@@ -3,7 +3,7 @@
     <div class="container" v-if="showRegister">
       <div class="image-container">
         <div class="image-wrapper">
-          <img src="../../../public/register.png" alt="" />
+          <!-- <img src="../../../public/register.png" alt="" /> -->
         </div>
       </div>
       <div class="inner-container">
@@ -11,16 +11,16 @@
           <p class="title">注册</p>
           <p class="subtitle">期待与你在新の世界邂逅。</p>
         </div>
-        <el-form class="form" ref="formRef" :model="registerForm" :rules="registerRules" status-icon>
-          <el-form-item prop="nickname" class="form-item">
-            <el-input class="input-field" v-model="registerForm.nickname" placeholder="用户名">
+        <el-form class="form" ref="registerFormRef" :model="registerForm" :rules="registerRules" status-icon>
+          <el-form-item prop="username" class="form-item">
+            <el-input class="input-field" v-model="registerForm.username" placeholder="用户名">
               <template #prefix>
                 <IconMdiUser />
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item prop="username" class="form-item">
-            <el-input class="input-field" v-model="registerForm.username" placeholder="账号">
+          <el-form-item prop="account_id" class="form-item">
+            <el-input class="input-field" v-model="registerForm.account_id" placeholder="账号">
               <template #prefix>
                 <IconMdiUser />
               </template>
@@ -66,19 +66,22 @@
 
 <script setup lang="ts">
   import type { FormInstance, FormRules } from 'element-plus'
+  import { register } from '@/api/user'
+
   const router = useRouter()
   const loading = ref(false)
   const registerFormRef = ref<FormInstance>()
   const registerForm = ref({
-    nickname: '',
     username: '',
+    account_id: '',
     password: '',
     confirmPassword: '',
     security_key: ''
   })
+
   const registerRules = ref<FormRules>({
-    nickname: [{ required: true, message: '请输入昵称', trigger: 'blur' }],
-    username: [
+    username: [{ required: true, message: '请输入昵称', trigger: 'blur' }],
+    account_id: [
       { required: true, message: '请输入账号', trigger: 'blur' },
       {
         pattern: /^[0-9]{6,10}$/,
@@ -126,12 +129,20 @@
     try {
       loading.value = true
       await registerFormRef.value.validate()
-      // TODO
-      console.log('register:', registerForm.value)
-      // 注册成功，跳转到登录页
-      router.push('/login')
-    } catch (error) {
+
+      // 调用注册接口
+      const response = await register(registerForm.value)
+
+      if (response.success) {
+        // 注册成功，跳转到登录页
+        router.push('/login')
+      } else {
+        // 处理注册失败的情况，例如显示错误消息
+        ElMessage.error(response.message || '注册失败')
+      }
+    } catch (error: any) {
       console.error('Register failed:', error)
+      ElMessage.error(error.message || '注册过程中出现错误')
     } finally {
       loading.value = false
     }

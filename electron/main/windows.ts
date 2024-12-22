@@ -76,6 +76,7 @@ export function createMainWindow() {
 
   if (VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(VITE_DEV_SERVER_URL)
+    mainWindow.webContents.openDevTools()
   } else {
     mainWindow.loadFile(indexHtml)
   }
